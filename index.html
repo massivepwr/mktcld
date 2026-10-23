@@ -114,6 +114,36 @@
     font-weight:700;
   }
 
+
+  /* 오늘 버튼: 기존 월 버튼과 동일한 높이, 얇은 에메랄드 펄 테두리 */
+  .mbtn.today-nav{
+    border:1px solid transparent;
+    background:linear-gradient(var(--card),var(--card)) padding-box,
+      linear-gradient(130deg,#F2FFFA 0%,#72B8A9 25%,#246F67 52%,#B7E5D8 76%,#397D75 100%) border-box;
+    color:#285D55;
+    padding:0 12px;
+    height:34px;
+    display:inline-flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:1px;
+    line-height:1;
+    box-sizing:border-box;
+  }
+  .mbtn.today-nav .today-ko{font-size:12px;font-weight:700;line-height:14px;}
+  .mbtn.today-nav .today-en{
+    display:inline-block;
+    background:#397D75;
+    color:#fff;
+    border-radius:999px;
+    font-size:7px;
+    font-weight:700;
+    letter-spacing:.01em;
+    line-height:9px;
+    padding:0 4px;
+  }
+
   /* calendar */
   .cal-title{
     font-family:'Noto Serif KR', serif;
@@ -152,7 +182,11 @@
   .cell.empty{background:transparent;border-color:transparent;}
   .cell.clickable{cursor:pointer;}
   .cell.clickable:hover{border-color:var(--ink);}
-  .cell.today{outline:2px solid var(--ink);outline-offset:-2px;}
+  /* 오늘: 기존 내부 배경을 유지하면서 테두리에만 에메랄드 펄 광택 */
+  .cell.today{border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(130deg,#F2FFFA 0%,#72B8A9 25%,#246F67 52%,#B7E5D8 76%,#397D75 100%) border-box;box-shadow:0 0 0 1px rgba(36,111,103,.14),0 1px 5px rgba(36,111,103,.12);outline:none;padding:5px 5px 7px;}
+  .cell.today .daynum{display:inline-flex;align-items:center;gap:5px;width:auto;height:auto;border-radius:0;background:none;color:var(--ink)!important;box-shadow:none;}
+  .cell.today .daynum::after{content:'TODAY';display:inline-block;background:#397D75;color:#fff;border-radius:10px;font-size:8px;font-weight:700;letter-spacing:.025em;line-height:1;padding:3px 5px;}
+  .cell.today.clickable:hover{border-color:transparent;}
   .daynum{
     font-size:13px;
     font-weight:700;
@@ -689,9 +723,9 @@ const EVENTS = /*EVENTS_START*/{"01-01":[{"cat":"cat1","title":"신정","desc":"
 const YEAR = 2027;
 const MONTH_NAMES = ["1월","2월","3월","4월","5월","6월","7월","8월","9월","10월","11월","12월"];
 const WD = ["일","월","화","수","목","금","토"];
-const TODAY = new Date(2027,0,1); // 2027-01-01 (2027 캘린더 기준)
+const TODAY = new Date(); // 접속한 컴퓨터의 현재 날짜
 
-let activeMonth = 1;
+let activeMonth = TODAY.getFullYear() <= YEAR ? TODAY.getMonth() + 1 : 1;
 let activeCats = new Set(Object.keys(CATS));
   let selectedCats = new Set();
 let selectedMonths = new Set();
@@ -835,6 +869,7 @@ function showCategoryPanel(){
 function hideCategoryPanel(){categoryPanelVisible=false;showCategoryPanel();}
 function renderTopMonthNav(){
  const nav=document.getElementById("monthnav");nav.innerHTML="";
+ const todayBtn=document.createElement("button");todayBtn.className="mbtn today-nav";todayBtn.innerHTML='<span class="today-ko">오늘</span><span class="today-en">TODAY</span>';todayBtn.setAttribute("aria-label","오늘 달력으로 이동");todayBtn.onclick=()=>{const now=new Date();activeMonth=now.getFullYear()<=YEAR?now.getMonth()+1:1;renderCalendar();};nav.appendChild(todayBtn);
  MONTH_NAMES.forEach((name,i)=>{const b=document.createElement("button");b.className="mbtn"+(activeMonth===i+1?" active":"");b.textContent=name;b.onclick=()=>{activeMonth=i+1;renderCalendar();};nav.appendChild(b);});
 }
 function renderCalendar(){
@@ -868,7 +903,7 @@ function renderCalendar(){
     const allEvents = EVENTS[key] || [];
     const events = allEvents.filter(e=>(!calendarCategoryFilterEnabled || selectedCats.has(e.cat)) && (!selectedMonths.size || selectedMonths.has(activeMonth)));
     const now = new Date();
-    const isToday = (now.getFullYear()===YEAR && now.getMonth()+1===activeMonth && now.getDate()===d);
+    const isToday = (now.getFullYear() <= YEAR && now.getMonth()+1===activeMonth && now.getDate()===d);
 
     const cell = document.createElement("div");
     cell.className = "cell" + (dow===0?" sun":dow===6?" sat":"") + (isToday?" today":"") + (events.length? " clickable":"");

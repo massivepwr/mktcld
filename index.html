@@ -14,7 +14,6 @@
     --ink:#232620;
     --ink-soft:#5B5A52;
     --line:#D8D5C9;
-
     --c-hist:#2C3E63;
     --c-hist-bg:#E4E8F0;
     --c-disaster:#3F3D3A;
@@ -36,8 +35,6 @@
     -webkit-font-smoothing:antialiased;
   }
   .wrap{max-width:920px;margin:0 auto;}
-
-  /* header */
   .head{
     display:flex;
     align-items:flex-end;
@@ -88,8 +85,6 @@
   .chip:active{transform:scale(0.97);}
   .chip.off{opacity:.35;}
   .dot{width:9px;height:9px;border-radius:50%;flex:none;}
-
-  /* month nav */
   .monthnav{
     display:flex;
     flex-wrap:wrap;
@@ -113,9 +108,6 @@
     border-color:var(--ink);
     font-weight:700;
   }
-
-
-  /* 오늘 버튼: 기존 월 버튼과 동일한 높이, 얇은 에메랄드 펄 테두리 */
   .mbtn.today-nav{
     border:1px solid transparent;
     background:linear-gradient(var(--card),var(--card)) padding-box,
@@ -143,8 +135,6 @@
     line-height:9px;
     padding:0 4px;
   }
-
-  /* calendar */
   .cal-title{
     font-family:'Noto Serif KR', serif;
     font-size:22px;
@@ -182,7 +172,6 @@
   .cell.empty{background:transparent;border-color:transparent;}
   .cell.clickable{cursor:pointer;}
   .cell.clickable:hover{border-color:var(--ink);}
-  /* 오늘: 기존 내부 배경을 유지하면서 테두리에만 에메랄드 펄 광택 */
   .cell.today{border:2px solid transparent;background:linear-gradient(var(--card),var(--card)) padding-box,linear-gradient(130deg,#F2FFFA 0%,#72B8A9 25%,#246F67 52%,#B7E5D8 76%,#397D75 100%) border-box;box-shadow:0 0 0 1px rgba(36,111,103,.14),0 1px 5px rgba(36,111,103,.12);outline:none;padding:5px 5px 7px;}
   .cell.today .daynum{display:inline-flex;align-items:center;gap:5px;width:auto;height:auto;border-radius:0;background:none;color:var(--ink)!important;box-shadow:none;}
   .cell.today .daynum::after{content:'TODAY';display:inline-block;background:#397D75;color:#fff;border-radius:10px;font-size:8px;font-weight:700;letter-spacing:.025em;line-height:1;padding:3px 5px;}
@@ -210,7 +199,6 @@
     text-overflow:ellipsis;
     white-space:nowrap;
   }
-
   .note{
     margin-top:22px;
     font-size:12.5px;
@@ -219,8 +207,6 @@
     padding-top:14px;
     line-height:1.6;
   }
-
-  /* category event list */
   .cat-panel{
     display:none;
     margin:8px 0 22px;
@@ -298,8 +284,6 @@
     border-color:var(--ink);
     box-shadow:0 0 0 1px var(--ink) inset;
   }
-
-  /* modal */
   .overlay{
     position:fixed;inset:0;
     background:rgba(35,38,32,.45);
@@ -392,7 +376,6 @@
     font-weight:400 !important;
     line-height:1.6 !important;
   }
-
   .ref-box{
     margin-top:12px;
   }
@@ -428,11 +411,9 @@
     font-weight:700;
     cursor:pointer;
   }
-
   @media (max-width:520px){
     .cat-item{grid-template-columns:76px 9px minmax(0,1fr) 16px;padding:11px 5px;}
     .cat-name{font-size:13px;}
-
     .cell{min-height:64px;}
     .ev-label{display:none;}
     .head h1{font-size:27px;}
@@ -440,7 +421,6 @@
 </style>
 
 <style>
-/* 사용자 제공 기념일 병합 표시 */
 .cat-panel-note{
   margin-top:6px;
   font-size:12px;
@@ -448,9 +428,10 @@
 }
 </style>
 
-<style id="vertical-event-layout">.dots{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;margin-top:5px!important}.dots .dot{width:10px!important;height:10px!important;min-width:10px!important;border-radius:50%!important;display:block!important}.ev-label{display:block!important;margin-top:2px!important;font-size:11px!important;line-height:15px!important;white-space:normal!important;overflow:hidden!important;text-overflow:ellipsis!important;word-break:keep-all!important}.cell:has(.dots){cursor:pointer!important}.cell:has(.dots):hover{background:rgba(0,0,0,.025)!important}@media(max-width:720px){.dots{gap:3px!important}.dots .dot{width:8px!important;height:8px!important}.ev-label{font-size:10px!important;line-height:13px!important}}</style>
+<style id="vertical-event-layout">
+.dots{display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:4px!important;margin-top:5px!important}.dots .dot{width:10px!important;height:10px!important;min-width:10px!important;border-radius:50%!important;display:block!important}.ev-label{display:block!important;margin-top:2px!important;font-size:11px!important;line-height:15px!important;white-space:normal!important;overflow:hidden!important;text-overflow:ellipsis!important;word-break:keep-all!important}.cell:has(.dots){cursor:pointer!important}.cell:has(.dots):hover{background:rgba(0,0,0,.025)!important}@media(max-width:720px){.dots{gap:3px!important}.dots .dot{width:8px!important;height:8px!important}.ev-label{font-size:10px!important;line-height:13px!important}}
+</style>
 <style id="calendar-uniform-layout">
-/* 모든 날짜 셀의 가로/세로 크기를 균일하게 유지 */
 .calendar-grid{
   grid-template-columns:repeat(7,minmax(0,1fr)) !important;
   grid-auto-rows:112px !important;
@@ -518,8 +499,6 @@
   height:19px !important;
   max-height:19px !important;
 }
-
-/* 화면이 작아져도 셀 비율을 유지 */
 @media (max-width:720px){
   .calendar-grid{grid-auto-rows:92px !important;}
   .day,.day.empty{height:92px !important;padding:6px 4px !important;}
@@ -563,23 +542,19 @@
 
 
 <style id="four-event-display-fix">
-/* Calendar cell stability */
 .calendar-grid, .calendar {
   min-width: 0;
 }
-
 .cell {
   min-width: 0 !important;
   box-sizing: border-box !important;
   overflow: hidden !important;
 }
-
 .dots {
   min-width: 0 !important;
   max-width: 100% !important;
   overflow: hidden !important;
 }
-
 .ev-label {
   min-width: 0 !important;
   width: 0 !important;
@@ -588,7 +563,6 @@
   overflow: hidden !important;
   text-overflow: ellipsis !important;
 }
-
 .more-events {
   color: #666;
 }
@@ -613,7 +587,6 @@
 @media(max-width:520px){.head .all-category-toggle{font-size:12px;padding:6px 11px;}}
 </style>
 <style id="header-category-alignment-v2">
-/* 6개 카테고리와 전체선택 버튼을 동일한 2행 영역에 배치 */
 .head .category-controls{display:flex;align-items:center;gap:10px;flex:0 1 570px;min-width:0;}
 .head .category-controls .legend{display:grid;grid-template-columns:repeat(3,max-content);gap:7px 8px;max-width:none;flex:1 1 auto;align-content:center;}
 .head .category-controls .all-category-toggle{align-self:center;}
@@ -622,7 +595,6 @@
 @media(max-width:520px){.head .category-controls .legend{grid-template-columns:repeat(2,max-content)}.head .category-controls{gap:7px}.head .chip{font-size:11px;padding:5px 7px}}
 </style>
 <style id="header-category-alignment-v3">
-/* 상단 두 줄: 6개 카테고리 + 전체선택을 한 묶음으로, 목록 보기는 우측 고정 */
 .head{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:12px;}
 .head h1{flex:0 1 390px;min-width:0;font-size:30px;}
 .head .category-controls{display:flex;flex:0 1 auto;min-width:0;align-items:center;gap:8px;}
@@ -643,7 +615,6 @@
 }
 </style>
 <style id="category-spacing-final">
-/* 카테고리 크기는 유지하고, 두 줄의 간격만 정렬 */
 .head .category-controls{display:grid;grid-template-columns:repeat(4,max-content);column-gap:8px;row-gap:7px;align-items:center;}
 .head .category-controls .legend{display:contents;}
 .head .category-controls .all-category-toggle{grid-column:4;grid-row:2;align-self:center;margin:0;display:inline-flex;align-items:center;justify-content:center;min-height:0;padding:5px 10px;font-size:12.5px;font-weight:400;line-height:1.2;border-radius:100px;}
@@ -653,7 +624,6 @@
 }
 </style>
 <style id="category-two-row-fix">
-/* 정확한 배치: 첫 줄 3개, 둘째 줄 정치·역사/문화·종교/스포츠/전체선택 */
 .head .category-controls{display:grid;grid-template-columns:repeat(4,max-content);column-gap:8px;row-gap:7px;align-items:center;}
 .head .category-controls .legend{display:contents;}
 .head .category-controls .legend .chip:nth-child(1){grid-column:1;grid-row:1;}
@@ -668,13 +638,51 @@
  .head .category-controls .all-category-toggle{grid-column:1 / span 2;grid-row:3;}
 }
 </style>
+<style id="gs-brand-and-contact-final">
+/* 로고와 제목만 조정: 기존 카테고리 및 월 버튼 규칙은 유지 */
+.head h1.gs-calendar-heading{flex:0 1 auto;font-size:29px;max-width:100%;}
+.gs-title-line{display:flex;align-items:center;gap:10px;white-space:nowrap;}
+.gs-brand-logo{display:block;width:112px;height:auto;max-height:55px;object-fit:contain;flex:none;}
+.gs-calendar-title{display:block;line-height:1.25;}
+.head h1.gs-calendar-heading small{font-size:14px;margin-top:5px;white-space:normal;}
+.calendar-contact{margin-top:9px;text-align:right;color:#565E58;font-size:12px;font-weight:500;line-height:1.5;}
+@media(max-width:520px){
+ .head h1.gs-calendar-heading{font-size:clamp(18px,5vw,26px);}
+ .gs-title-line{gap:6px;}
+ .gs-brand-logo{width:clamp(74px,22vw,105px);}
+ .head h1.gs-calendar-heading small{font-size:12px;}
+}
+</style>
+
+<style id="gs-header-final-layout">
+/* 상단: 로고/제목 2행, 검은 선 아래 설명, 설명과 월 버튼 사이 여백 */
+.head h1.gs-calendar-heading{flex:0 1 390px;min-width:0;font-size:30px;max-width:100%}
+.gs-title-line{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:12px;white-space:normal}
+.gs-brand-logo{width:112px;max-height:42px;object-fit:contain;object-position:left center}
+.gs-calendar-title{font-size:30px;line-height:1.22;white-space:nowrap}
+.calendar-helper{font-family:'Noto Sans KR',sans-serif;font-size:14px;color:var(--ink-soft);line-height:1.5;margin-top:0;margin-bottom:24px}
+@media(max-width:1050px){
+ .head h1.gs-calendar-heading{flex:1 1 100%}
+}
+@media(max-width:520px){
+ .gs-brand-logo{width:100px;max-height:38px}
+ .gs-calendar-title{font-size:clamp(22px,6vw,30px);white-space:normal}
+ .calendar-helper{font-size:12px;margin-bottom:22px}
+}
+</style>
+
+<style id="gs-compact-header-spacing">
+.head{padding-bottom:7px;margin-bottom:2px;}
+.gs-title-line{gap:5px;}
+.calendar-helper{margin-top:0;margin-bottom:24px;}
+@media(max-width:520px){.calendar-helper{margin-bottom:22px;}}
+</style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="head">
-    <h1>2027 이슈 관리 캘린더
-      <small>날짜를 클릭하면 개념·설명과 마케팅 시 주의할 점을 볼 수 있어요</small>
+    <h1 class="gs-calendar-heading"><span class="gs-title-line"><img class="gs-brand-logo" src="data:image/png;base64,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" alt="GS리테일"><span class="gs-calendar-title">2027 이슈 관리 캘린더</span></span>
     </h1>
     <div class="category-controls"><div class="legend" id="legend"></div>
     <button type="button" id="allCategoryToggle" class="all-category-toggle" aria-pressed="false">전체선택</button></div>
@@ -691,6 +699,7 @@
     <div class="category-layout"><div class="side-months" id="sideMonths"></div><div class="cat-list" id="catList"></div></div>
   </div>
 
+  <div class="calendar-helper">날짜를 클릭하면 개념·설명과 마케팅 시 주의할 점을 볼 수 있어요</div>
   <div class="monthnav" id="monthnav"></div>
   <div class="cal-title-row"><div class="cal-title" id="calTitle"></div><span class="cal-summary" id="calSummary"></span></div>
   <div class="grid" id="grid"></div>
@@ -698,6 +707,7 @@
   <div class="note">
     ⓘ 음력 기념일(설날·정월대보름·추석·삼복 등)은 2027년 실제 환산 날짜를 기준으로 표시했습니다. 2027 FIFA U-20 월드컵은 공식 세부 일정 확정 전까지 임시 표기입니다. 국가 참사 추모일은 애도 기간 전후 프로모션 톤 조절이 특히 필요한 날짜입니다.
   </div>
+  <div class="calendar-contact">※ 문의 : 준법지원실 위기관리파트</div>
 </div>
 
 <div class="overlay" id="overlay">
